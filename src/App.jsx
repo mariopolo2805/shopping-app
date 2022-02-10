@@ -1,27 +1,27 @@
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 // Styles
 import './App.scss';
 
+// Context
+import { CartProvider } from './context/CartContext';
+
 // Components
 import Header from './components/Header/Header';
-import NotFound from './components/NotFound/NotFound';
-
-// Pages
-import Home from './pages/Home/Home';
-import ProductDetail from './pages/ProducDetail/ProductDetail';
-import ProductList from './pages/ProductList/ProductList';
+import routes from './config/routes';
 
 function App() {
   return (
     <div className="app">
-      <Header />
-      <Routes>
-        <Route exact path='' element={<Home />} />
-        <Route path='products' element={<ProductList />} />
-        <Route path='products/:productId' element={<ProductDetail />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <CartProvider>
+        <Header />
+        <Routes>
+          {routes.map((route) => (
+            <Route key={route.path} exact={route.exact} path={route.path} element={route.element} />
+          ))}
+        </Routes>
+      </CartProvider>
     </div>
   );
 }
