@@ -27,9 +27,9 @@ const Header = () => {
         </button>
         {isShowCart ?
           <ul>
-            {items.map((item) => {
+            {items.map((item, index) => {
               return (
-                <li key={item.id}>
+                <li key={index}>
                   {item.name}
                 </li>
               );
